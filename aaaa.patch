@@ -1,0 +1,487 @@
+Index: src/components/Contest.js
+===================================================================
+--- src/components/Contest.js	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ src/components/Contest.tsx	(date 1633624254893)
+@@ -1,7 +1,7 @@
+ import React from "react";
+ import { ContestList } from "../CONST"
+ 
+-const Contest = () => (
++const Contest = (): JSX.Element => (
+     <section className="position-relative pt-120 pb-120" id="raffles">
+         <div className="bg-el"><img src="assets/images/elements/contest-bg.jpg" alt="image"/></div>
+         <div className="container">
+Index: src/components/Footer.js
+===================================================================
+--- src/components/Footer.js	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ src/components/Footer.tsx	(date 1633624254905)
+@@ -1,6 +1,6 @@
+ import React from "react";
+ 
+-const Footer = () => (
++const Footer = (): JSX.Element => (
+     <footer className="footer-section">
+         <div className="bg-shape--top">
+             <img src="assets/images/elements/round-shape-2.png" alt="image"/>
+Index: src/components/Types.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Types.tsx	(date 1633624807667)
++++ src/components/Types.tsx	(date 1633624807667)
+@@ -0,0 +1,24 @@
++export interface IPlayCards {
++    background : string
++    image : string
++    no : string
++    title : string
++    content : string
++    content2 : string
++}
++
++export interface IContestList {
++    image: string
++    price: number
++    price2: string
++    meta1: string
++    meta2: string
++    footerClass: string
++    footer1: string
++    footer2?: string
++}
++
++export interface IImages {
++    src : string
++    className : string
++}
+\ No newline at end of file
+Index: tsconfig.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- tsconfig.json	(date 1633625346268)
++++ tsconfig.json	(date 1633625346268)
+@@ -0,0 +1,36 @@
++{
++  "parser": "babel-eslint",
++  "compilerOptions": {
++    "experimentalDecorators": true,
++    "target": "es5",
++    "lib": [
++      "dom",
++      "dom.iterable",
++      "esnext"
++    ],
++    "allowJs": true,
++    "skipLibCheck": true,
++    "esModuleInterop": true,
++    "allowSyntheticDefaultImports": true,
++    "strict": true,
++    "forceConsistentCasingInFileNames": true,
++    "noFallthroughCasesInSwitch": true,
++    "module": "esnext",
++    "moduleResolution": "node",
++    "resolveJsonModule": true,
++    "isolatedModules": true,
++    "noEmit": true,
++    "jsx": "react-jsx"
++  },
++  "exclude": [
++    "node_modules",
++    "**/*spec.ts"
++  ],
++  "include": [
++    "src/"
++  ],
++  "typeRoots": [
++    "../node_modules/@types",
++    "../@types"
++  ]
++}
+Index: src/components/Hero.js
+===================================================================
+--- src/components/Hero.js	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ src/components/Hero.tsx	(date 1633624254901)
+@@ -1,7 +1,7 @@
+ import React from "react";
+ import { Images } from "../CONST"
+ 
+-const Hero = () => (
++const Hero = (): JSX.Element => (
+     <section className="hero">
+         <div className="hero__shape">
+             <img src="assets/images/elements/hero-shape.jpg.png" alt="image1"/>
+Index: src/components/HowToPlay.js
+===================================================================
+--- src/components/HowToPlay.js	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ src/components/HowToPlay.tsx	(date 1633624254897)
+@@ -1,7 +1,7 @@
+ import React from "react";
+ import { PlayCards } from "../CONST"
+ 
+-const HowToPlay = () => (
++const HowToPlay = (): JSX.Element => (
+     <section className="position-relative pt-120 pb-120 overflow-hidden">
+         <div className="play-elements wow bounceIn" data-wow-duration="0.5s" data-wow-delay="0.7s">
+             <img src="assets/images/elements/how-riddler.jpg" alt="image1"/>
+Index: .eslintrc.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .eslintrc.js	(date 1633579466270)
++++ .eslintrc.js	(date 1633579466270)
+@@ -0,0 +1,100 @@
++module.exports = {
++  parser: "@typescript-eslint/parser",
++  parserOptions: {
++    project: "./tsconfig.json",
++    ecmaVersion: 2020,
++    sourceType: "module",
++    ecmaFeatures: {
++      jsx: true,
++      modules: true,
++      experimentalObjectRestSpread: true,
++    },
++  },
++  plugins: ["@typescript-eslint"],
++  extends: [
++    "plugin:react/recommended",
++    "plugin:@typescript-eslint/recommended",
++  ],
++  env: {
++    node: true,
++    es6: true,
++    browser: true,
++  },
++  rules: {
++    "@typescript-eslint/restrict-plus-operands": "error",
++    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
++    // Variable
++    // 'init-declarations': 'error',
++    // 'no-use-before-define': 'error',
++    // Stylistic Issues
++    "array-bracket-newline": ["error", { multiline: true, minItems: null }],
++    "array-bracket-spacing": "error",
++    "brace-style": ["error", "1tbs", { allowSingleLine: true }],
++    "block-spacing": "error",
++    // 'comma-dangle': 'warn',
++    "comma-spacing": "error",
++    "comma-style": "error",
++    "computed-property-spacing": "error",
++    "func-call-spacing": "error",
++    //'implicit-arrow-linebreak': ['error', 'beside'],
++    // indent: ['error', 4],
++    "keyword-spacing": "error",
++    "multiline-ternary": ["error", "never"],
++    // 'no-lonely-if': 'error',
++    "no-mixed-operators": "error",
++    "no-tabs": "off",
++    "no-unneeded-ternary": "error",
++    "no-whitespace-before-property": "error",
++    "nonblock-statement-body-position": "error",
++    "object-property-newline": [
++      "error",
++      { allowAllPropertiesOnSameLine: true },
++    ],
++    "quote-props": ["error", "as-needed"],
++    // quotes: ['error', 'prefer-single'],
++    semi: ["warn", "always"],
++    "semi-spacing": "error",
++    // ES6
++    //  'arrow-spacing': 'error',
++    // 'no-confusing-arrow': 'error',
++    "no-duplicate-imports": "warn",
++    "no-var": "warn",
++    // 'object-shorthand': 'error',
++    "prefer-const": "warn",
++    //  'prefer-template': 'error'
++  },
++  overrides: [
++    {
++      files: ["*.ts", "*.tsx"], // Your TypeScript files extension
++      excludedFiles: ["*.test.js", "*.js", "assets/*.js", "assets/js/scripts.js", "assets/js/core/bootstrap.min.js"],
++      parserOptions: {
++        project: ["./tsconfig.json"], // Specify it only for TypeScript files
++      },
++    },
++  ],
++  parser: "@typescript-eslint/parser",
++  settings: {
++    react: {
++      createClass: "createReactClass", // Regex for Component Factory to use,
++      // default to "createReactClass"
++      pragma: "React", // Pragma to use, default to "React"
++      fragment: "Fragment", // Fragment to use (may be a property of <pragma>), default to "Fragment"
++      version: "detect", // React version. "detect" automatically picks the version you have installed.
++      // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
++      // default to latest and warns if missing
++      // It will default to "detect" in the future
++      flowVersion: "0.53", // Flow version
++    },
++    propWrapperFunctions: [
++      // The names of any function used to wrap propTypes, e.g. `forbidExtraProps`. If this isn't set, any propTypes wrapped in a function will be skipped.
++      "forbidExtraProps",
++      { property: "freeze", object: "Object" },
++      { property: "myFavoriteWrapper" },
++    ],
++    linkComponents: [
++      // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
++      "Hyperlink",
++      { name: "Link", linkAttribute: "to" },
++    ],
++  },
++};
+Index: src/components/Header.js
+===================================================================
+--- src/components/Header.js	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ src/components/Header.tsx	(date 1633624260672)
+@@ -1,6 +1,6 @@
+ import React from "react";
+ 
+-const Header = () => (
++const Header = (): JSX.Element => (
+     <header className="header">
+         <div className="header__top">
+             <div className="container">
+Index: src/index.js
+===================================================================
+--- src/index.js	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ src/index.tsx	(date 1633626060442)
+@@ -1,6 +1,6 @@
+ import React from 'react';
+ import ReactDOM from 'react-dom';
+-import App from './App';
++import App from './app/App';
+ import reportWebVitals from './reportWebVitals';
+ 
+ ReactDOM.render(
+Index: src/CONST.js
+===================================================================
+--- src/CONST.js	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ src/CONST.tsx	(date 1633625730934)
+@@ -1,4 +1,6 @@
+-export const PlayCards = [
++import {IContestList, IImages, IPlayCards} from './components/Types'
++
++export const PlayCards: IPlayCards[] = [
+     {
+         background: 'assets/images/elements/card-bg-1.jpg',
+         image: 'assets/images/icon/play/2.png',
+@@ -25,7 +27,7 @@
+     },
+ ];
+ 
+-export const ContestList = [
++export const ContestList: IContestList[] = [
+     {
+         image: 'assets/images/sgb-asset.png',
+         price: 1003.15,
+@@ -47,10 +49,10 @@
+     }
+ ];
+ 
+-export const Images = [
+-    {src : 'assets/images/elements/car-shadow.png', className: 'car-shadow'},
+-    {src : 'assets/images/elements/car-ray.png', className: 'car-ray'},
+-    {src : 'assets/images/elements/car-light.png', className: 'car-light'},
+-    {src : 'assets/images/logo-sgb-rr-tso.png', className: 'sgb-logo'},
+-    {src : 'assets/images/elements/car-star.png', className: 'car-star'},
++export const Images: IImages[] = [
++    {src: 'assets/images/elements/car-shadow.png', className: 'car-shadow'},
++    {src: 'assets/images/elements/car-ray.png', className: 'car-ray'},
++    {src: 'assets/images/elements/car-light.png', className: 'car-light'},
++    {src: 'assets/images/logo-sgb-rr-tso.png', className: 'sgb-logo'},
++    {src: 'assets/images/elements/car-star.png', className: 'car-star'},
+ ];
+\ No newline at end of file
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- package.json	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ package.json	(date 1633625978403)
+@@ -6,7 +6,12 @@
+     "@testing-library/jest-dom": "^5.11.4",
+     "@testing-library/react": "^11.1.0",
+     "@testing-library/user-event": "^12.1.10",
++    "@types/react": "^17.0.11",
++    "@types/react-dom": "^17.0.7",
++    "mobx": "^6.3.2",
++    "mobx-react": "^7.2.0",
+     "react": "^17.0.2",
++    "babel-eslint": "^10.1.0",
+     "react-dom": "^17.0.2",
+     "react-scripts": "4.0.3",
+     "web-vitals": "^1.0.1"
+@@ -34,5 +39,11 @@
+       "last 1 firefox version",
+       "last 1 safari version"
+     ]
++  },
++  "devDependencies": {
++    "@babel/plugin-proposal-decorators": "^7.12.1",
++    "@typescript-eslint/eslint-plugin": "^4.27.0",
++    "@typescript-eslint/parser": "^4.33.0",
++    "typescript": "^4.3.2"
+   }
+ }
+Index: src/App.js
+===================================================================
+--- src/App.js	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ src/App.tsx	(date 1633624099908)
+@@ -8,7 +8,7 @@
+ import Login from "./components/Modal/Login";
+ import SignUp from "./components/Modal/SignUp";
+ 
+-const App = () => {
++const App = (): JSX.Element => {
+   return (
+       <>
+         <ScrollUp/>
+Index: src/components/ScrollUp.js
+===================================================================
+--- src/components/ScrollUp.js	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ src/components/ScrollUp.tsx	(date 1633624150295)
+@@ -1,6 +1,6 @@
+ import React from "react";
+ 
+-const ScrollUp = () => {
++const ScrollUp = (): JSX.Element => {
+ 
+     const handleScrollUp = () => {
+         setTimeout(() => {
+Index: src/@state/user/userStore.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/@state/user/userStore.ts	(date 1633626434342)
++++ src/@state/user/userStore.ts	(date 1633626434342)
+@@ -0,0 +1,27 @@
++import { action, makeAutoObservable } from "mobx";
++
++export interface IUserStore {
++  userName: string;
++  firstName: string;
++  email: string;
++  lastName: string;
++}
++
++export class UserStore implements IUserStore {
++  userName = "";
++  firstName = "";
++  lastName = "";
++  email = "";
++
++  constructor() {
++    makeAutoObservable(this);
++  }
++
++  @action setUser = (userData: any): void => {
++    this.userName = userData.userName;
++    this.firstName = userData.firstName;
++    this.lastName = userData.lastName;
++    this.email = userData.email;
++  };
++
++}
+Index: src/components/Modal/Login.js
+===================================================================
+--- src/components/Modal/Login.js	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ src/components/Modal/Login.tsx	(date 1633624254913)
+@@ -1,6 +1,6 @@
+ import React from "react";
+ 
+-const Login = () => (
++const Login = (): JSX.Element => (
+     <div className="modal fade" id="loginModal" tabIndex={1} role="dialog" aria-hidden="true">
+         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+             <div className="modal-content">
+Index: src/components/Modal/SignUp.js
+===================================================================
+--- src/components/Modal/SignUp.js	(revision 65778e4417187bd3d17281826fea1a556a648959)
++++ src/components/Modal/SignUp.tsx	(date 1633624254909)
+@@ -1,6 +1,6 @@
+ import React from "react";
+ 
+-const SignUp = () => (
++const SignUp = (): JSX.Element => (
+     <div className="modal fade" id="signupModal" tabIndex={1} role="dialog" aria-hidden="true">
+         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+             <div className="modal-content">
+Index: src/app/App.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/app/App.tsx	(date 1633626500313)
++++ src/app/App.tsx	(date 1633626500313)
+@@ -0,0 +1,42 @@
++import React from "react";
++import app from "./index";
++import ScrollUp from "../components/ScrollUp";
++import Header from "../components/Header";
++import Hero from "../components/Hero";
++import HowToPlay from "../components/HowToPlay";
++import Contest from "../components/Contest";
++import Footer from "../components/Footer";
++import Login from "../components/Modal/Login";
++import SignUp from "../components/Modal/SignUp";
++
++const App = (): JSX.Element => {
++  console.log(app.user)
++  return (
++      <>
++        <ScrollUp/>
++        <div className="page-wrapper">
++          {/*/!* login modal *!/*/}
++          <Login/>
++          {/*/!* Sign Up modal *!/*/}
++          <SignUp/>
++          {/* header-section start  */}
++          <Header/>
++          {/* header-section end  */}
++          {/* hero start */}
++          <Hero/>
++          {/* hero start */}
++          {/* how to play section start */}
++          <HowToPlay/>
++          {/* how to play section end */}
++          {/* contest section start */}
++          <Contest/>
++          {/* contest section end */}
++          {/* footer section start  */}
++          <Footer/>
++          {/* footer section end */}
++        </div>
++      </>
++  );
++};
++
++export default App;
+Index: src/app/index.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/app/index.ts	(date 1633626217346)
++++ src/app/index.ts	(date 1633626217346)
+@@ -0,0 +1,14 @@
++import { makeAutoObservable } from "mobx";
++import { UserStore } from "../@state/user/userStore";
++
++class AppState {
++  user: UserStore;
++
++  constructor() {
++    makeAutoObservable(this);
++    this.user = new UserStore();
++  }
++}
++
++const app = new AppState();
++export default app;
